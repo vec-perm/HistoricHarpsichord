@@ -1,0 +1,76 @@
+*.o
+*.a
+*.gcno
+*.gcda
+*~
+*.bak
+.libs
+.deps
+.dirstamp
+Makefile
+Makefile.in
+INSTALL
+aclocal.m4
+autom4te.cache/
+compile
+config.guess
+config.h
+config.h.in
+config.log
+config.status
+config.sub
+configure
+intltool-*.in
+denemo.spec
+depcomp
+install-sh
+libtool
+ltmain.sh
+missing
+mkinstalldirs
+stamp-h1
+tags
+
+# Build directory
+build/libtool.m4
+build/ltoptions.m4
+build/ltsugar.m4
+build/ltversion.m4
+build/lt~obsolete.m4
+build/intltool.m4
+
+# Built directory
+bin
+
+# Translation directory
+po/POTFILES
+po/notexist
+po/Makefile.in.in
+po/stamp-it
+po/*.gmo
+po/denemo-*.pot
+po/.intltool-merge-cache
+
+# Source files
+src/denemo
+src/lyparser.c
+src/pathconfig.h
+src/*.cDEV
+
+# Tools directory
+tools/cairo_svg2path
+tools/extract_scheme
+tools/generate_source
+
+# Anjuta ignores
+Debug
+.anjuta*
+*.anjuta
+
+# Vim files
+*.swp
+
+#Tests
+test-driver
+
+*.appdata.xml
