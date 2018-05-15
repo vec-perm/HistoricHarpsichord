@@ -1,0 +1,70 @@
+%define name  @PACKAGE@
+%define ver      @VERSION@
+%define rel 1
+%define prefix  /usr
+
+Summary: Graphical music notation program
+Name: %{name}
+Version: %ver
+Release: %rel
+License: GPLv2
+Group: Applications/Multimedia
+Source: http://download.savannah.gnu.org/releases/denemo/%{name}-%{version}.tar.gz
+URL: http://www.denemo.org/
+BuildRoot: %{_tmppath}/%{name}-%{ver}-%{rel}-rpm-buildroot
+
+BuildRequires: portaudio-devel aubio-devel gtk2-devel
+BuildRequires: gettext libxml2-devel fftw-devel desktop-file-utils
+Requires: portaudio aubio gtk2 libxml2 fftw
+
+
+%description
+Denemo is a graphical music notation program written in C with
+gtk+. As of April 2000, it is an official part of the GNU project
+(http://www.gnu.org/)
+
+It is intended to be used in conjunction with GNU Lilypond
+(http://www.cs.uu.nl/hanwen/lilypond/), but is adaptable to other
+computer-music-related purposes as well. 
+
+%prep
+%setup -q
+
+%build
+%configure 
+make %{?_smp_mflags}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT/%{prefix}/include
+desktop-file-install --vendor=""               \
+--dir=${RPM_BUILD_ROOT}%{_datadir}/applications         \
+%{buildroot}/%{_datadir}/applications/denemo.desktop
+%find_lang %{name}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files -f %{name}.lang
+%defattr(-,root,root)
+%dir %{_sysconfdir}/denemo
+%{_datadir}/denemo
+%{_datadir}/icons/denemo.png
+%{_datadir}/fonts/truetype/denemo
+%{_datadir}/applications/denemo.desktop
+%{_bindir}/denemo
+%doc COPYING README README.lilypond ChangeLog 
+
+%changelog
+* Sun Aug  3 2008 Roy Rankin <rrankin@ihug.com.au>
+-Additional BuildRequires from Mock testing, 
+ fixed desktop-file-install usage
+* Fri Jul 25 2008 Roy Rankin <rrankin@ihug.com.au>
+-Update for 0.7.9 and Fedora 8
+* Fri Dec 14 2001 Adam Tee <ajtee@ajtee.uklinux.net>
+-Update for 0.5.8
+* Sun Nov 12 2000 Matt Hiller <mhiller@pacbell.net>
+- Update for 0.5.5
+* Wed Jun 21 2000 Sourav K. Mandal <smandal@mit.edu>
+- Initial release of RPM package
