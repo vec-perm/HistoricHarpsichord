@@ -1,0 +1,5 @@
+A Software Synthesizer
+
+HistoricHarpsichord is intended to allow the user to get a reasonably historical harpsichord sound from a MIDI USB keyboard.
+It may need no setup (depending on your machine and what you have installed) and there are no controls that could result in
+an  embarrassing silence or instrument when you press the keys. It was made by cutting down the GNU Denemo program.

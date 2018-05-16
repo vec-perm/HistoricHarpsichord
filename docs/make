@@ -1,0 +1,15 @@
+html:  
+	xsltproc --output  historicHarpsichord-manual.html --stringparam  admon.graphics 1 --stringparam html.stylesheet  historicHarpsichord.css /usr/share/xml/docbook/stylesheet/nwalsh/xhtml/docbook.xsl  historicHarpsichordmanual.xml
+
+chunk:
+	xsltproc --output  manualoutchunk.html --stringparam  admon.graphics 1  --stringparam html.stylesheet  historicHarpsichord.css /usr/share/xml/docbook/stylesheet/nwalsh/xhtml/chunk.xsl historicHarpsichordmanual.xml
+
+pdf:   
+	xsltproc  --output  historicHarpsichord-manual.fo  --stringparam  fop.extensions 	./mycustomfils.xsl 	historicHarpsichordmanual.xml
+	fop.sh  -fo  manualout.fo  -pdf  manualout.pdf
+	acroread  manualout.pdf
+075
+	xsltproc --output historicHarpsichord-manual.html --stringparam  admon.graphics 1 --stringparam html.stylesheet  historicHarpsichord.css --stringparam profile.revision "0.75" /usr/share/xml/docbook/stylesheet/nwalsh/xhtml/profile-docbook.xsl historicHarpsichordmanual.xml
+
+076	
+	xsltproc --output historicHarpsichord-manual.html --stringparam  admon.graphics 1 --stringparam html.stylesheet  historicHarpsichord.css --stringparam profile.revision "0.76" /usr/share/xml/docbook/stylesheet/nwalsh/xhtml/profile-docbook.xsl historicHarpsichordmanual.xml
