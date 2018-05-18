@@ -84,16 +84,15 @@ fluidsynth_init (HistoricHarpsichordPrefs * config, unsigned int samplerate)
       g_string_assign (HistoricHarpsichord.prefs.fluidsynth_soundfont, default_soundfont);
       g_free (default_soundfont);
     }
+  else
+     g_print ("Using soundfont %s.\n", config->fluidsynth_soundfont->str);
   if (sfont_id == -1)
     {
       fluidsynth_shutdown ();
       g_warning ("The Harpsichord Synthesizer will not work!!!!\n\n\n");
       return -1;
     }
-  else
-    {
-      g_message ("The default fluidsynth soundfont has been loaded");
-    }
+
  reset_synth_channels ();
 
   return 0;
