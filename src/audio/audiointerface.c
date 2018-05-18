@@ -47,7 +47,7 @@ static backend_t *backends[NUM_BACKENDS] = { NULL };
 #define IMMEDIATE_QUEUE_SIZE 32
 #define INPUT_QUEUE_SIZE 256
 #define MIXER_QUEUE_SIZE 0
-#define RUBBERBAND_QUEUE_SIZE 50000
+#define RUBBERBAND_QUEUE_SIZE 0
 
 
 // the time in µs after which the queue thread wakes up, whether it has been
@@ -482,8 +482,12 @@ input_midi_event (backend_type_t backend, int port, unsigned char *buffer)
     }
 
   event_queue_write_input (get_event_queue (backend), &ev);
-
- 
+  // if the lock fails, processing of the event will be delayed until the
+  // queue thread wakes up on its own
+  if (!try_signal_queue ())
+    {
+      g_debug ("Couldn't signal MIDI event input to queue");
+    }
 }
 
 
